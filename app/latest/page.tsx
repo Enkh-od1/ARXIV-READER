@@ -35,7 +35,7 @@ export default async function LatestIssue() {
   const issues = await getLatestIssues();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black">
       {/* Хөх Navbar – өмнөх кодыг энд тавина уу */}
       <nav className="bg-blue-800 text-white shadow-lg">
         <div className="container mx-auto px-6 py-4">
@@ -60,18 +60,22 @@ export default async function LatestIssue() {
               className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
             >
               <div className="md:w-1/3 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center p-8">
-  {issue.attributes.coverImage?.data?.attributes?.url ? (
-    <Image
-      src={`${STRAPI_URL}${issue.attributes.coverImage.data.attributes.url}`}
-      alt="Дугаарын нүүр зураг"
-      width={800}
-      height={600}
-      className="rounded-xl shadow-lg object-contain"
-      unoptimized
-    />
-  ) : (
-    <FileText className="w-32 h-32 text-blue-600 dark:text-blue-300" />
-  )}
+  {(() => {
+    const cover = issue.attributes.coverImage;
+    if (cover && cover.data && cover.data.attributes && cover.data.attributes.url) {
+      return (
+        <Image
+          src={`${STRAPI_URL}${cover.data.attributes.url}`}
+          alt="Дугаарын нүүр зураг"
+          width={800}
+          height={600}
+          className="rounded-xl shadow-lg object-contain"
+          unoptimized
+        />
+      );
+    }
+    return <FileText className="w-32 h-32 text-blue-600 dark:text-blue-300" />;
+  })()}
 </div>
 
               <div className="md:w-2/3 p-10 flex flex-col justify-between">
@@ -95,7 +99,7 @@ export default async function LatestIssue() {
                   href={`${STRAPI_URL}${issue.attributes.pdfFile.data.attributes.url}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition flex items-center justify-center gap-3 shadow-lg"
+                  className="mt-8 bg-linear-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition flex items-center justify-center gap-3 shadow-lg"
                 >
                   Бүтэн дугаарыг PDF-ээр татах
                   <Download className="w-6 h-6" />

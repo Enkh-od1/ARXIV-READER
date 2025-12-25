@@ -12,7 +12,7 @@ const navItems = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black transition-colors duration-500">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black transition-colors duration-500">
       {/* Хөх Navbar */}
       <nav className="bg-blue-800 text-white shadow-lg">
         <div className="container mx-auto px-6 py-4">

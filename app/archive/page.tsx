@@ -33,7 +33,7 @@ const archiveYears = [
 
 export default function ArchivePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black transition-colors duration-500">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black transition-colors duration-500">
       {/* Хөх Navbar */}
       <nav className="bg-blue-800 text-white shadow-lg">
         <div className="container mx-auto px-6 py-4">
@@ -91,7 +91,7 @@ export default function ArchivePage() {
                     className="group bg-white dark:bg-gray-800 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-blue-100 dark:border-gray-700"
                   >
                     {/* Cover placeholder */}
-                    <div className="h-64 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center">
+                    <div className="h-64 bg-linear-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center">
                       <div className="text-center">
                         <FileText className="w-20 h-20 text-blue-600 dark:text-blue-300 mx-auto mb-4" />
                         <p className="text-2xl font-bold text-blue-800 dark:text-blue-200">
@@ -114,7 +114,7 @@ export default function ArchivePage() {
                         href={issue.pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition flex items-center justify-center gap-3 shadow-lg group-hover:scale-105 duration-300"
+                        className="w-full mt-6 bg-linear-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition flex items-center justify-center gap-3 shadow-lg group-hover:scale-105 duration-300"
                       >
                         PDF Татах
                         <Download className="w-6 h-6" />

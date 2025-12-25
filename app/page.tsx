@@ -150,7 +150,7 @@ export default function Home() {
   const currentEnd = Math.min((currentPage + 1) * resultsPerPage, totalResults);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black transition-colors duration-500">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-black transition-colors duration-500">
       {/* Navbar - Хөх өнгийн, <Link> ашигласан */}
       <nav className="bg-blue-800 text-white shadow-lg">
         <div className="container mx-auto px-6 py-4">
@@ -215,7 +215,7 @@ export default function Home() {
       </nav>
 
       {/* Statistic Widget - Нэг шугаманд */}
-      <div className="bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 py-12">
+      <div className="bg-linear-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 py-12">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center">
@@ -272,7 +272,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={loading}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl disabled:opacity-70 transition flex items-center gap-2"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-linear-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl disabled:opacity-70 transition flex items-center gap-2"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5" />}
                 Хайх
@@ -316,7 +316,7 @@ export default function Home() {
                 <a
                   href={paper.pdfUrl}
                   target="_blank"
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-4 rounded-xl font-semibold hover:shadow-lg transition"
+                  className="bg-linear-to-r from-green-600 to-emerald-600 text-white px-6 py-4 rounded-xl font-semibold hover:shadow-lg transition"
                 >
                   <FileText className="w-5 h-5 inline mr-2" />
                   PDF Унших

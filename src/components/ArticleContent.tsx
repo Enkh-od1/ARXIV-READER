@@ -2,24 +2,21 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations, useLocale } from 'next-intl';
 
-// 1. Сэтгүүлийн дугаарын (Issue) үндсэн өгөгдөл
 interface IssueAttributes {
-  Title?: string;      // 'Title' биш
-  number?: string | number;  // 'Number' биш
+  Title?: string;
+  number?: string | number;
   publishedYear?: string | number;
   Number?: string;
 }
 
-// 2. Сэтгүүлийн дугаарын (Issue) Strapi-ийн стандарт бүтэц
 interface IssueData {
   id?: number | string;
   documentId?: string;
   attributes?: IssueAttributes;
-  
 }
 
-// 3. Өгүүллийн (Article) бүх талбарууд
 interface ArticleAttributes {
   title?: string;
   Title?: string;
@@ -36,13 +33,11 @@ interface ArticleAttributes {
   PageCount?: string;
   volume?: string;
   journalName?: string;
-  // Issue холбоос - Хамгийн чухал хэсэг:
   issue?: {
     data?: IssueData;
   };
 }
 
-// 4. Компонентийн хүлээж авах Props
 interface ArticleProps {
   article: {
     id?: number;
@@ -51,28 +46,22 @@ interface ArticleProps {
   } & ArticleAttributes;
 }
 
-
-
 export default function ArticleContent({ article }: ArticleProps) {
-  // 1. Үндсэн датаг салгах
+  const t = useTranslations('ArticleContent');
+  const locale = useLocale();
+
   const data = article?.attributes || article;
-// 1. Issue-ийн өгөгдлийг Strapi-ийн бүтцээс салгах
-const issueData = data?.issue?.data?.attributes || article?.issue?.data?.attributes;
+  const issueData = data?.issue?.data?.attributes || article?.issue?.data?.attributes;
+  const issueId = data?.issue?.data?.id || data?.issue?.data?.documentId || article?.issue?.data?.id;
 
+  const rawDate = data?.customPublishedDate || data?.publishedAt;
+  const extractedYear = rawDate ? new Date(rawDate).getFullYear() : "2026";
 
-const issueId = data?.issue?.data?.id || data?.issue?.data?.documentId || article?.issue?.data?.id;
+  const issueNumber = issueData?.Number;
+  const publishedYear = extractedYear;
+  const journalTitle = issueData?.Title;
 
-const rawDate = data?.customPublishedDate || data?.publishedAt;
-const extractedYear = rawDate ? new Date(rawDate).getFullYear() : "2026";
-
-// 2. Динамик утгууд (Утга байхгүй бол хоосон үлдэнэ, 30 эсвэл 32 гэж хатуу заахгүй)
-const issueNumber = issueData?.Number;         // Дугаар (Vol.)
-const publishedYear = extractedYear;                     // Таны Админаас оруулсан ОН
-const journalTitle = issueData?.Title; // Сэтгүүлийн нэр
-
-// 3. Issue-ийн ID (Холбоос хийхэд хэрэгтэй)
-
-   const formatFullDate = (dateString: string) => {
+  const formatFullDate = (dateString: string) => {
     if (!dateString) return "";
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -80,281 +69,241 @@ const journalTitle = issueData?.Title; // Сэтгүүлийн нэр
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}.${month}.${day}`;
   };
-  // Өгөгдлийг аюулгүй салгаж авах
-
 
   return (
     <div className="w-full">
-      {/* Дээд талын Breadcrumb - Сэтгүүлийн дугаар руу буцах холбоосыг нэмэв */}
+      {/* Breadcrumb */}
       <nav className="text-sm text-slate-500 mb-6 flex gap-2 items-center">
-        <Link href="/home" className="hover:text-blue-600 transition-colors">Нүүр</Link>
+        <Link href={`/${locale}/home`} className="hover:text-blue-600 transition-colors">
+          {t('breadcrumbHome')}
+        </Link>
         <span>/</span>
-        <Link href="/archive" className="hover:text-blue-600 transition-colors">Архив</Link>
-            <span>/</span>
-            <Link href={`/archive/${issueId}`} className="hover:text-blue-600 transition-colors"> 
-  Өгүүлэл
-</Link>
+        <Link href={`/${locale}/archive`} className="hover:text-blue-600 transition-colors">
+          {t('breadcrumbArchive')}
+        </Link>
+        <span>/</span>
+        <Link href={`/${locale}/archive/${issueId}`} className="hover:text-blue-600 transition-colors"> 
+          {t('breadcrumbArticle')}
+        </Link>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-        {/* ЗҮҮН ТАЛ: ҮНДСЭН МЭДЭЭЛЭЛ (8 багана) */}
+        {/* ЗҮҮН ТАЛ */}
         <div className="lg:col-span-8">
           
-          {/* ӨГҮҮЛЛИЙН ГАРЧИГ - 'title' алдааг энд засав */}
+          {/* Зохиогчийн тухай */}
+          <section className="mb-8">
+            <h3 className="text-lg font-bold border-b-2 border-slate-200 pb-2 mb-4 text-slate-800 uppercase tracking-wide">
+              {t('aboutAuthor')}
+            </h3>
+            <div className="text-slate-900 leading-snug">
+              {data?.author_text ? (
+                data.author_text.split('\n').map((line, i) => {
+                  if (!line.trim()) return null;
+                  const isNameLine = /^[А-Я]\./.test(line.trim());
+                  return (
+                    <p 
+                      key={i} 
+                      className={isNameLine 
+                        ? "font-bold text-lg mt-4 text-slate-900"
+                        : "text-slate-600 text-sm mt-1 ml-1"
+                      }
+                    >
+                      {line}
+                    </p>
+                  );
+                })
+              ) : (
+                <p className="text-slate-400 italic text-sm">{t('noAuthorInfo')}</p>
+              )}
+            </div>
+          </section>
 
-          {/* Зохиогчийн хэсэг */}
-          {/* Зохиогчийн хэсэг */}
-<section className="mb-8">
-  <h3 className="text-lg font-bold border-b-2 border-slate-200 pb-2 mb-4 text-slate-800 uppercase tracking-wide">
-    Зохиогчийн тухай
-  </h3>
-  <div className="text-slate-900 leading-snug">
-    {data?.author_text ? (
-      data.author_text.split('\n').map((line, i) => {
-        if (!line.trim()) return null;
-
-        // Нэр, цолтой мөрүүдийг (А., Н. гэх мэтээр эхэлсэн бол) Bold болгох
-        const isNameLine = /^[А-Я]\./.test(line.trim());
-
-        return (
-          <p 
-            key={i} 
-            className={isNameLine 
-              ? "font-bold text-lg mt-4 text-slate-900" // Нэрний хэв маяг
-              : "text-slate-600 text-sm mt-1 ml-1"      // Ажлын газрын хэв маяг (жижиг)
-            }
-          >
-            {line}
-          </p>
-        );
-      })
-    ) : (
-      <p className="text-slate-400 italic text-sm">Зохиогчийн мэдээлэл байхгүй.</p>
-    )}
-  </div>
-</section>
-
-
-          {/* DOI хэсэг */}
+          {/* DOI */}
           {data?.doi && (
             <div className="mb-8 text-sm">
-              <span className="font-bold">DOI: </span>
+              <span className="font-bold">{t('doiLabel')}: </span>
               <a href={data.doi} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{data.doi}</a>
             </div>
           )}
 
-          {/* Түлхүүр үгс - 'any' ашиглахгүйгээр засав */}
+          {/* Түлхүүр үг */}
           {(data?.key || data?.Key) && (
             <div className="mb-10 text-sm leading-relaxed">
-              <span className="font-bold">Түлхүүр үг: </span>
+              <span className="font-bold">{t('keywordsLabel')}: </span>
               <span className="text-slate-700 italic">{data?.key || data?.Key}</span>
             </div>
           )}
 
-          {/* ABSTRACT (Хураангуй) */}
+          {/* Хураангуй */}
           <section className="mt-12">
             <h3 className="text-lg font-bold border-b-2 border-slate-200 pb-2 mb-6 text-slate-800 uppercase tracking-wide">
-              Хураангуй
+              {t('abstract')}
             </h3>
             <div className="text-slate-700 leading-relaxed text-sm whitespace-pre-line">
-              {data?.summary_text || data?.Summary || "Хураангуй оруулаагүй байна."}
+              {data?.summary_text || data?.Summary || t('noSummary')}
             </div>
           </section>
 
-          {/* REFERENCES (Эх сурвалж) */}
-          {/* REFERENCES (Эх сурвалж) */}
-{/* REFERENCES (Эх сурвалж) */}
-{data?.works_text && (
-  <section className="mt-12">
-    <h3 className="text-lg font-bold border-b border-slate-200 pb-2 mb-6 text-slate-800 uppercase tracking-wide">
-      Эх сурвалжийн жагсаалт
-    </h3>
-    <div className="text-slate-700 text-sm leading-relaxed space-y-3">
-      {data.works_text.split('\n').map((line, index) => {
-        if (!line.trim()) return null;
+          {/* Эх сурвалж */}
+          {data?.works_text && (
+            <section className="mt-12">
+              <h3 className="text-lg font-bold border-b border-slate-200 pb-2 mb-6 text-slate-800 uppercase tracking-wide">
+                {t('references')}
+              </h3>
+              <div className="text-slate-700 text-sm leading-relaxed space-y-3">
+                {data.works_text.split('\n').map((line, index) => {
+                  if (!line.trim()) return null;
+                  
+                  const renderWithLinks = (text: string) => {
+                    const urlRegex = /(https?:\/\/[^\s]+)/g;
+                    return text.split(urlRegex).map((part, i) => {
+                      if (part.match(urlRegex)) {
+                        return (
+                          <a 
+                            key={i} 
+                            href={part} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-blue-600 hover:underline break-all"
+                          >
+                            {part}
+                          </a>
+                        );
+                      }
+                      return part;
+                    });
+                  };
 
-        // 1. Нэр болон Онг салгах (Bold болгох хэсэг)
-        
-        // 2. Линк таних функц (Regex)
-        const renderWithLinks = (text: string) => {
-          const urlRegex = /(https?:\/\/[^\s]+)/g;
-          return text.split(urlRegex).map((part, i) => {
-            if (part.match(urlRegex)) {
-              return (
-                <a 
-                  key={i} 
-                  href={part} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-blue-600 hover:underline break-all"
-                >
-                  {part}
-                </a>
-              );
-            }
-            return part;
-          });
-        };
-
-        return (
-          <p key={index} className="pl-5 relative">
-            <span className="absolute left-0">•</span>
-            {/* Нэр, оныг Bold болгох логик */}
-            {line.match(/^([^()]+\(\d{4}\)\.)(.*)/) ? (
-              <>
-                <strong className="font-bold text-slate-900">
-                  {line.match(/^([^()]+\(\d{4}\)\.)/)?.[0]}
-                </strong>
-                {renderWithLinks(line.replace(/^([^()]+\(\d{4}\)\.)/, ""))}
-              </>
-            ) : (
-              renderWithLinks(line)
-            )}
-          </p>
-        );
-      })}
-    </div>
-  </section>
-)}
-
-
+                  return (
+                    <p key={index} className="pl-5 relative">
+                      <span className="absolute left-0">•</span>
+                      {line.match(/^([^()]+\(\d{4}\)\.)(.*)/) ? (
+                        <>
+                          <strong className="font-bold text-slate-900">
+                            {line.match(/^([^()]+\(\d{4}\)\.)/)?.[0]}
+                          </strong>
+                          {renderWithLinks(line.replace(/^([^()]+\(\d{4}\)\.)/, ""))}
+                        </>
+                      ) : (
+                        renderWithLinks(line)
+                      )}
+                    </p>
+                  );
+                })}
+              </div>
+            </section>
+          )}
         </div>
 
-        {/* БАРУУН ТАЛ: SIDEBAR (4 багана) */}
         {/* БАРУУН ТАЛ: SIDEBAR */}
-<aside className="lg:col-span-4 space-y-6 pt-10">
-  
-  {/* 1. PUBLISHED */}
-  <div className="bg-slate-100 p-4 rounded-sm border-t-4 border-slate-300">
-    <p className="text-[11px] font-bold text-slate-500 uppercase mb-2">Published</p>
-  <p className="text-slate-700 text-sm">
-  {data?.customPublishedDate 
-    ? formatFullDate(data.customPublishedDate as string) // 'as string' гэж нэмэв
-    : data?.publishedAt 
-      ? formatFullDate(data.publishedAt as string)      // 'as string' гэж нэмэв
-      : '2025.03.13'}
-</p>
-</div>
+        <aside className="lg:col-span-4 space-y-6 pt-10">
+          
+          {/* 1. PUBLISHED */}
+          <div className="bg-slate-100 p-4 rounded-sm border-t-4 border-slate-300">
+            <p className="text-[11px] font-bold text-slate-500 uppercase mb-2">{t('published')}</p>
+            <p className="text-slate-700 text-sm">
+              {data?.customPublishedDate 
+                ? formatFullDate(data.customPublishedDate as string)
+                : data?.publishedAt 
+                  ? formatFullDate(data.publishedAt as string)
+                  : '2025.03.13'}
+            </p>
+          </div>
 
-  {/* 2. HOW TO CITE */}
-<div className="bg-slate-100 p-4 rounded-sm border-t-4 border-slate-300">
-  <p className="text-[11px] font-bold text-slate-500 uppercase mb-2">How to Cite</p>
-  <div className="text-slate-700 text-[13px] leading-relaxed mb-4">
-    <p className="text-slate-700 text-[12px] leading-snug mb-3">
-  {(() => {
-    // 1. Зохиогчдын нэрийг салгаж авах (Таны өмнөх логик)
-    const lines = data?.author_text?.split('\n') || [];
-    const names = lines
-      .filter(line => /^[А-Я]\./.test(line.trim()))
-      .map(line => line.split(',')[0].trim());
-    
-    const authorStr = names.join(', ');
-    
-    
+          {/* 2. HOW TO CITE */}
+          <div className="bg-slate-100 p-4 rounded-sm border-t-4 border-slate-300">
+            <p className="text-[11px] font-bold text-slate-500 uppercase mb-2">{t('howToCite')}</p>
+            <div className="text-slate-700 text-[13px] leading-relaxed mb-4">
+              <p className="text-slate-700 text-[12px] leading-snug mb-3">
+                {(() => {
+                  const lines = data?.author_text?.split('\n') || [];
+                  const names = lines
+                    .filter(line => /^[А-Я]\./.test(line.trim()))
+                    .map(line => line.split(',')[0].trim());
+                  const authorStr = names.join(', ');
 
-    // 2. Бусад мэдээллийг бэлдэх
-    const publishedYear = extractedYear;
-    const journal = data?.title || 'Өгүүллийн нэр'; // Сэтгүүлийн нэр
-    const journalTitle = issueData?.Title || "Төрийн удирдлага";
-    const issueNumber = issueData?.Number; 
-    const pageRange = data?.pages || data?.PageCount;    // Дугаар (Vol.)          // Таны Админаас оруулсан ОН
-    
+                  const publishedYear = extractedYear;
+                  const journal = data?.title || t('articleNamePlaceholder');
+                  const journalTitle = issueData?.Title || (locale === 'en' ? 'Public Administration' : 'Төрийн удирдлага');
+                  const issueNumber = issueData?.Number; 
+                  const pageRange = data?.pages || data?.PageCount;
 
-    // 3. Бүгдийг нэгтгэж форматлах
-    // Формат: Зохиогч (Он). Өгүүллийн нэр. Сэтгүүлийн нэр, Дугаар, Хуудас.
-    return `${authorStr} (${publishedYear}). ${journal}, ${journalTitle}. Vol.${issueNumber}. ${pageRange}`;
-  })()}
-</p>
+                  return `${authorStr} (${publishedYear}). ${journal}, ${journalTitle}. Vol.${issueNumber}. ${pageRange}`;
+                })()}
+              </p>
+            </div>
+            
+            <select className="w-full text-xs p-2 border border-slate-300 bg-white rounded-sm focus:outline-none">
+              <option>APA 7</option>
+            </select>
+          </div>
 
-  </div>
-  
-    <select className="w-full text-xs p-2 border border-slate-300 bg-white rounded-sm focus:outline-none">
-    <option>APA 7</option>
-  </select>
+          {/* 3. ISSUE */}
+          <div className="bg-[#f8f9fa] border border-slate-200 rounded-sm overflow-hidden">
+            <div className="px-4 py-2 border-b border-slate-200 bg-[#f1f3f5]">
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase mb-2">{t('issue')}</h3>
+            </div>
+            <div className="p-4 bg-white">
+              {issueId ? (
+                <Link href={`/${locale}/archive/${issueId}`} className="group block">
+                  <span className="text-[#005c97] hover:underline text-[14px] font-medium leading-snug">
+                    Vol. {issueNumber} ({publishedYear}): 
+                    <span className="ml-1 group-hover:underline text-[#005c97]">
+                      {journalTitle}
+                    </span>
+                  </span>
+                </Link>
+              ) : (
+                <p className="text-slate-400 text-xs italic">{t('loading')}</p>
+              )}
+            </div>
+          </div>
 
-</div>
-
-{/* 3. ISSUE */}
-
-
-
-<div className="bg-[#f8f9fa] border border-slate-200 rounded-sm overflow-hidden">
-  <div className="px-4 py-2 border-b border-slate-200 bg-[#f1f3f5]">
-    <h3 className="text-[11px] font-bold text-slate-500 uppercase mb-2">Issue</h3>
-  </div>
-  <div className="p-4 bg-white">
-    {issueId ? (
-      <Link href={`/archive/${issueId}`} className="group block">
-        <span className="text-[#005c97] hover:underline text-[14px] font-medium leading-snug">
-          {/* Энд зөвхөн АДМИН-аас оруулсан ОН харагдана */}
-          Vol. {issueNumber} ({publishedYear}): 
-          <span className="ml-1 group-hover:underline text-[#005c97]">
-            {journalTitle}
-          </span>
-        </span>
-      </Link>
-    ) : (
-      <p className="text-slate-400 text-xs italic">Мэдээлэл ачаалж байна...</p>
-    )}
-  </div>
-</div>
-
-
-
-
-
-  {/* 4. LICENSE */}
-  <div className="bg-slate-100 p-4 rounded-sm border-t-4 border-slate-300">
-    <p className="text-[11px] font-bold text-slate-500 uppercase mb-2">License</p>
-    <p className="text-slate-700 text-[12px] leading-snug mb-3">
-  Copyright (c) {publishedYear} {(() => {
-    // 1. Текстийг мөр мөрөөр нь салгах
-    const lines = data?.author_text?.split('\n') || [];
-    
-    // 2. Зөвхөн нэр бүхий мөрүүдийг (жишээ нь: "С.Галбадрах, ...") шүүж авах
-    const names = lines
-      .filter(line => /^[А-Я]\./.test(line.trim())) // Нэрээр эхэлсэн мөрүүдийг авна
-      .map(line => line.split(',')[0].trim());      // Таслалаас өмнөх хэсгийг (нэрийг) авна
-    
-    // 3. Нэрнүүдийг "болон"-оор холбож харуулна
-    return names.join(', ');
-  })()}
-</p>
-    <div className="flex flex-col gap-2">
-<div className="flex items-center gap-1 mt-3">
-  <Image 
-    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" 
-    alt="CC" 
-    width={20} 
-    height={20} 
-    className="w-5 h-5" 
-  />
-  <Image 
-    src="https://mirrors.creativecommons.org/presskit/icons/by.svg" 
-    alt="BY" 
-    width={20} 
-    height={20} 
-    className="w-5 h-5" 
-  />
-  <a 
-    href="https://creativecommons.org/licenses/by/4.0/" 
-    target="_blank" 
-    rel="noreferrer" 
-    className="ml-1 text-[11px] text-blue-600 hover:underline font-medium"
-  >
-    CC BY 4.0
-  </a>
-</div>
-      <p className="text-[11px] text-slate-500">
-        This work is licensed under a <a href="https://creativecommons.org" target="_blank" className="text-blue-600 hover:underline">Creative Commons Attribution 4.0 International License</a>.
-      </p>
-    </div>
-  </div>
-
-</aside>
-
-
+          {/* 4. LICENSE */}
+          <div className="bg-slate-100 p-4 rounded-sm border-t-4 border-slate-300">
+            <p className="text-[11px] font-bold text-slate-500 uppercase mb-2">{t('license')}</p>
+            <p className="text-slate-700 text-[12px] leading-snug mb-3">
+              {t('copyright')} (c) {publishedYear} {(() => {
+                const lines = data?.author_text?.split('\n') || [];
+                const names = lines
+                  .filter(line => /^[А-Я]\./.test(line.trim()))
+                  .map(line => line.split(',')[0].trim());
+                return names.join(', ');
+              })()}
+            </p>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-1 mt-3">
+                <Image 
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" 
+                  alt="CC" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5" 
+                />
+                <Image 
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg" 
+                  alt="BY" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5" 
+                />
+                <a 
+                  href="https://creativecommons.org/licenses/by/4.0/" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="ml-1 text-[11px] text-blue-600 hover:underline font-medium"
+                >
+                  CC BY 4.0
+                </a>
+              </div>
+              <p className="text-[11px] text-slate-500">
+                {t('licenseText.prefix')} <a href="https://creativecommons.org" target="_blank" className="text-blue-600 hover:underline">{t('licenseText.link')}</a>.
+              </p>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   );

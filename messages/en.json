@@ -1,0 +1,386 @@
+{
+  "Navbar": {
+    "siteTitle": "Public Administration",
+    "home": "Home",
+    "about": "Editorial Policy",
+    "editorial": "Editorial Board",
+    "archive": "Archive",
+    "forAuthors": "For Authors",
+    "contact": "Contact"
+  },
+  "Home": {
+    "errorLoading": "Failed to load information. Please wait and try again.",
+    "about": {
+      "title": "About the Journal",
+      "paragraph1": "The Journal of Public Administration is a theoretical and methodological journal aimed at disseminating the results of researchers' academic work on public administration, management theory, methodology, and practical issues, and making them publicly accessible. The journal has been published by the Academy of Management since 2017.",
+      "paragraph2": "The journal is published twice a year (in April and October).",
+      "paragraph3": "It is an open-access, peer-reviewed theoretical and methodological journal that accepts articles written by researchers in Mongolian and English, with double-blind peer review.",
+      "paragraph4": "The journal is fully protected by intellectual property rights. This journal is the academic work and intellectual property of the Academy.",
+      "issnPrint": "ISSN (print):",
+      "issnOnline": "ISSN (online):",
+      "issnL": "ISSN-L:",
+      "address": "Address: Mongolia, Ulaanbaatar, Khan-Uul District, 17th khoroo, Academy of Management Street, Academy of Management Building B, Rooms 201, 202"
+    },
+    "latestIssue": {
+      "title": "Latest Issue:",
+      "year": "",
+      "viewButton": "View Issue"
+    },
+    "information": {
+      "title": "Information",
+      "callForPapers": "The Journal of Public Administration is accepting articles for its first issue of 2026. We invite you to submit your work.",
+      "email": "Email",
+      "readMore": "Read More"
+    },
+    "publisher": {
+      "title": "Publisher"
+    }
+  },
+
+  "ForAuthors": {
+  "pageTitle": "For Authors",
+  "tabs": {
+    "requirements": "Submission Requirements",
+    "ethics": "Ethical Standards",
+    "review": "Peer Review",
+    "reviewFull": "Double-blind Peer Review"
+  },
+  "tab1": {
+    "intro": {
+      "item1": "Articles submitted for publication must not have been previously published or made publicly available in any form.",
+      "item2": "Academic works submitted to the Journal of Public Administration must be written within the scope of the content and research directions specified in the journal's guidelines.",
+      "item3": "Articles for publication may be written in Mongolian or English, following the structure and citation requirements of the APA (American Psychological Association) 7th Edition style.",
+      "item4": "Before submitting their work, authors must verify that requirements have been met according to the checklist and review the text for stylistic and grammatical errors.",
+      "item5": "Email for submissions:"
+    },
+    "sectionA": {
+      "title": "SECTION A: REQUIREMENTS FOR ACADEMIC ARTICLES",
+      "part1Title": "1. Structural Requirements for Academic Articles",
+      "item1_1": "Article title",
+      "item1_2": "Author's surname and given name",
+      "item1_3": "Institutional affiliation",
+      "item1_4": "Corresponding author's email address",
+      "item1_5": "Abstract: When the article is written in English, the abstract should be provided in both Mongolian and English; when written in Mongolian, the abstract should be in English, within 150-250 words. According to the APA 7th Edition guidelines as adopted by the Academy's writing standards, the abstract should briefly state the main objective, methodology, results, and conclusion of the research, summarizing the problem addressed, theoretical and practical significance, issues raised, and novel aspects.",
+      "item1_6": "Keywords: Keywords should be placed below the abstract, no more than 5 words. They should be nouns reflecting the main content of the article, written in singular form.",
+      "item1_7": "Introduction: The introduction should include the research problem, objectives, questions, hypotheses, the state of research on the topic (with citations), pressing issues, the significance of the research, structure, terminology, and the novel aspects of the issues raised.",
+      "item1_8": "Research Methodology: Describe in detail the methodology used in the research, including what methods were applied, how data was collected and analyzed, and how the research stages were organized.",
+      "item1_9": "Research Results: Present the results obtained from the research methodology, comparing them with results from other researchers, highlighting differences, strengths, and weaknesses within the scope of the topic.",
+      "item1_10": "Discussion: This section should elaborate on how the main conclusions can be expanded and improved, and provide detailed comparisons with the findings of other researchers.",
+      "item1_11": "Conclusion: Include the integrated results of the research work, their theoretical, methodological, and practical significance, contributions to the field, and possibilities for future development.",
+      "item1_12": "Acknowledgments: This section may mention individuals, institutions, scholars, researchers, and teachers who assisted in conducting the research and producing results, as well as organizations providing financial support, project names, and numbers.",
+      "item1_13": "References: Include all academic articles, books, brochures, and reports cited in the article in the reference list, following the order of Mongolian-English-other languages.",
+      "part2Title": "2. Text Requirements for Articles",
+      "item2_1": "Paper size, page numbering: Write the main text of the article within 10 pages using Microsoft Word following these standards:",
+      "item2_1_a": "Paper size: 21.0 cm x 29.7 cm (A4)",
+      "item2_1_b": "Page margins should be 2.54 cm on all sides.",
+      "item2_1_c": "Page numbers should be placed in the upper right corner of every page.",
+      "item2_2": "Article title: Write the article title in Times New Roman font, 12 pt, bold, centered in one column.",
+      "item2_3": "Headings: Section headings should be in Times New Roman font, 12 pt, bold.",
+      "item2_4": "Author's name: Place the author(s)' surname and given name below the article title, in Times New Roman font, 12 pt.",
+      "item2_4_mn": "In Mongolian, write the author's name after the surname as follows:",
+      "item2_4_mnExample": "Namdagiin Azjargal, Jugderiin Delgermaa, etc.",
+      "item2_4_en": "In English, write the author's given name before the surname as follows:",
+      "item2_4_enExample": "Azjargal Namdag, Delgermaa Jugder, etc.",
+      "item2_5": "Institution name: Do not abbreviate institution names; write the author's affiliated institution name, province/city, and country below the author's name without spacing.",
+      "item2_6": "Corresponding author's email: Place the author's email and contact information in the \"Author Note\" section.",
+      "item2_7": "Abstract: Write the abstract in Times New Roman font, 12 pt, with 2 lines spacing.",
+      "item2_8": "Keywords: Write keywords in Times New Roman font, 12 pt, below the abstract with 1 line spacing.",
+      "item2_9": "Main text: Write the main text in Times New Roman font, 12 pt, with 2 lines spacing.",
+      "item2_10": "Use the International SI System of Units. When writing measurements in cm, mm, g, ha, etc., do not use spaces, periods, or commas.",
+      "item2_11": "Photographs, drawings, and tables may be in color or black and white. Image resolution should be 300-600 dpi.",
+      "item2_12": "Use the Table function in Microsoft Word to prepare tables. Place table numbers and titles on the same line above the table.",
+      "item2_13": "Figure and diagram captions should be centered below them, with the number preceding the caption.",
+      "item2_14": "Limit the total number of figures and tables to no more than 8; include relevant tables and figures in supplementary materials, avoiding excessively large tables.",
+      "item2_15": "Use the Equation function in Microsoft Word to write formulas, with mathematical expressions in 10 pt, centered.",
+      "item2_16": "When using abbreviations, the full meaning should be expressed the first time. Example: Academy of Management (AoM).",
+      "item2_17": "Articles must fully meet the requirements of Mongolian language style and orthography (or English language writing requirements if in English).",
+      "part3Title": "3. Requirements for Citations and Reference Lists",
+      "item3_1": "List cited works under the heading \"References\" in Times New Roman font, 12 pt. Include this section after the Acknowledgments.",
+      "item3_2": "Short quotations should be in double quotation marks. Long quotations should be without quotation marks, in a new paragraph, indented 2.54 cm from the left margin, with 2 lines spacing.",
+      "item3_3": "List references in alphabetical order.",
+      "item3_4": "Self-citations from the author's other works should not exceed 15% of the total citations.",
+      "item3_5": "Format reference lists according to APA citation style. Software like Zotero or Mendeley may be used. Following APA 7th Edition format: Author's surname, first initial. (Year). Title. Journal name, volume (issue), pages. DOI, URL."
+    },
+    "sectionB": {
+      "title": "SECTION B: REQUIREMENTS FOR OTHER TYPES OF WORKS"
+    },
+    "table": {
+      "col1": "Editor's Note",
+      "col2": "Research Note",
+      "col3": "Book Review",
+      "col4": "Reflective Essay",
+      "row1": {
+        "label": "General Nature",
+        "col1": "An introductory text directed at readers in the form of an article, journal, or book preface.",
+        "col2": "Research information that is not yet complete enough to be published as a full article, presenting interim research results.",
+        "col3": "A text evaluating the content, quality, form, and value of a book.",
+        "col4": "A text based on personal views and experiences, containing deep meaning."
+      },
+      "row2": {
+        "label": "Purpose",
+        "col1": "To introduce the main idea and features of the issue to readers.",
+        "col2": "To convey interim research results to readers.",
+        "col3": "To scientifically analyze the book and provide understanding to readers.",
+        "col4": "To give readers an opportunity for deep reflection on a single issue or topic."
+      },
+      "row3": {
+        "label": "Content",
+        "col1_a": "Features of previous and current issues",
+        "col1_b": "Scope of topics and trends",
+        "col1_c": "Goals and values of the creative team",
+        "col2_a": "Content briefly or partially explaining the research methodology aligned with the research objective, problem, and aims",
+        "col2_b": "About research implementation, particularly the progress overview of fieldwork results",
+        "col3_a": "Brief content of the book",
+        "col3_b": "Strengths and weaknesses",
+        "col3_c": "Author's style and ideas",
+        "col3_d": "Significance of the book",
+        "col4_a": "Develops and elaborates one main idea",
+        "col4_b": "Real stories, thoughts, and artistic expression",
+        "col4_c": "Deep thinking, philosophical tone"
+      },
+      "row4": {
+        "label": "Length",
+        "col1": "500-1000 words",
+        "col2": "1500-3500 words",
+        "col3": "800-1500 words",
+        "col4": "800-1200 words"
+      },
+      "row5": {
+        "label": "Style",
+        "col1": "Concise, clear",
+        "col2": "Not following the strict structure of a research article, but expressing content in note form using research terminology with logical sequence and justification",
+        "col3": "Research-style, logical, well-reasoned",
+        "col4": "Free, vivid, expressive"
+      }
+    }
+  },
+  "tab2": {
+    "intro": "The journal strictly adheres to ethical standards in creating and publishing works, following the guidelines of the Committee on Publication Ethics (COPE).",
+    "boardTitle": "Responsibilities of the Editorial Board:",
+    "board": {
+      "item1": "Conduct fair and independent peer review of any work submitted to the journal.",
+      "item2": "Decide on publication based on academic value, significance, novelty, and relevance to the journal's topic and content.",
+      "item3": "Strictly maintain the confidentiality of any information related to submitted works.",
+      "item4": "Avoid conflicts of interest and pay attention to preventing any issues that may negatively affect transparency.",
+      "item5": "Ensure the independence of issue editors.",
+      "item6": "Ensure accessibility and sustainable preservation of published works.",
+      "item7": "Implement ethical oversight and, if necessary, request revisions or retract works."
+    },
+    "reviewerTitle": "Responsibilities of Reviewers:",
+    "reviewer": {
+      "item1": "Provide objective, constructive, and fair feedback on works.",
+      "item2": "Strictly maintain the confidentiality of any information related to works.",
+      "item3": "Disclose any conflicts of interest in advance.",
+      "item4": "Report any suspected ethical violations (such as plagiarism, data fabrication, etc.) to the Editorial Board."
+    },
+    "authorTitle": "Responsibilities of Authors:",
+    "author": {
+      "item1": "Create and submit works without plagiarism or false information.",
+      "item2": "Properly cite used sources and accurately mention contributions from others.",
+      "item3": "Transparently disclose conflicts of interest and funding sources.",
+      "item4": "Collaborate with the editor when revising or retracting works if necessary."
+    },
+    "plagiarismTitle": "Plagiarism and Other Violations:",
+    "plagiarism": {
+      "item1": "All submitted works will be checked using plagiarism detection software.",
+      "item2": "Any violations (such as data fabrication, plagiarism, duplicate publication, etc.) will be resolved according to the guidelines of the Committee on Publication Ethics (COPE)."
+    },
+    "correctionTitle": "Corrections and Retractions:",
+    "correction": {
+      "item1": "In cases of serious ethical violations or unreliable results, publication will be refused and the work retracted.",
+      "item2": "Corrections will be promptly published when errors are discovered."
+    }
+  },
+  "tab3": {
+    "intro": "Any work submitted for publication in the Journal of Public Administration undergoes detailed, fair, double-blind peer review for its quality, accuracy, and academic significance.",
+    "step1": {
+      "title": "1. Submission Acceptance",
+      "desc": "After electronic submission, the unit at the Academy of Management responsible for the journal's documentation, information, and organization will verify the following:",
+      "item1": "Whether it aligns with the journal's purpose, editorial policy, content, and scope",
+      "item2": "Whether the guidelines for authors have been followed",
+      "item3": "Whether all required materials are complete",
+      "item4": "Whether ethical standards have been followed (via plagiarism detection software)",
+      "note": "If these basic requirements are not met, the work will be returned to the author and publication refused by decision of the Editorial Board member managing the issue."
+    },
+    "step2": {
+      "title": "2. Peer Review Model",
+      "desc": "The Journal of Public Administration uses a Double-blind Peer Review Model. This model creates real opportunities for independent peer review by keeping the names and information of authors and reviewers mutually confidential."
+    },
+    "step3": {
+      "title": "3. Selecting Reviewers",
+      "desc": "For works meeting basic requirements, peer review will be conducted by no fewer than two reviewers selected by the Editorial Board, who have knowledge and experience in the relevant field with no conflicts of interest. Reviewers must decline if there are any conflicts of interest."
+    },
+    "step4": {
+      "title": "4. Review Criteria",
+      "desc": "Reviewers will follow the criteria below when reviewing works:",
+      "item1": "Novelty and significance",
+      "item2": "Methodological rigor",
+      "item3": "Logical coherence and clarity",
+      "item4": "Relevance to the field",
+      "item5": "Research ethics",
+      "note": "Reviews must be objective, constructive, and respectful of the author's ideas and positions. The guidelines of the Committee on Publication Ethics (COPE) will be strictly followed."
+    },
+    "step5": {
+      "title": "5. Editorial Board Decision",
+      "desc": "Based on reviewers' reports, one of the following decisions will be made:",
+      "item1": "Accept",
+      "item2": "Accept with minor revisions",
+      "item3": "Revise and resubmit",
+      "item4": "Reject",
+      "note": "The Editorial Board makes the final decision, basing it solely on academic merit without discrimination on the basis of the author's ethnicity, race, age, gender, occupation, position, or beliefs."
+    },
+    "step6": {
+      "title": "6. Revision and Resubmission",
+      "desc": "If revisions are needed based on feedback from peer review, the author must respond to each comment individually and resubmit the revised work within the specified timeframe. The Editorial Board may send it back to reviewers for additional review if deemed necessary."
+    },
+    "step7": {
+      "title": "7. Confidentiality",
+      "desc": "Submitted works, reviewer reports, feedback, and other related information are confidential and considered institutional secrets. Disclosing or using information about a work to others before publication is strictly prohibited."
+    },
+    "step8": {
+      "title": "8. Ethical Oversight",
+      "desc": "The Journal of Public Administration follows the principles and guidelines of the Committee on Publication Ethics. Any violations of ethical standards, such as plagiarism, citation manipulation, data fabrication, or undue influence on peer review, will be resolved according to the COPE guidelines."
+    },
+    "step9": {
+      "title": "9. Transparency",
+      "desc": "Information about the Editorial Board's activities and peer review model is publicly available on the journal's official website."
+    }
+  }
+},
+
+"About": {
+  "intro": {
+    "title": "About the Journal",
+    "description": "The Academy publishes academic works with the aim of disseminating research-based knowledge and contributing to policy solutions."
+  },
+  "policy": {
+    "title": "Editorial Policy",
+    "intro": "The journal accepts works in the following areas and publishes them based on double-blind peer review.",
+    "topics": {
+      "item1": "Tradition, reform, and trends in Mongolian public administration",
+      "item2": "Issues of local self-governance",
+      "item3": "New paradigms and implementation of public administration",
+      "item4": "Issues of state structure and political science",
+      "item5": "Theoretical and methodological issues of public policy",
+      "item6": "Foreign and domestic policy issues of Mongolia",
+      "item7": "Management and regulation of public service sectors",
+      "item8": "Civil service and human resource management in public service",
+      "item9": "Public finance, budget, and financial management",
+      "item10": "Administrative law and processes"
+    },
+    "typesTitle": "Types of works accepted for publication:",
+    "types": {
+      "item1": "Theoretical and methodological research articles",
+      "item2": "Official translations of research works",
+      "item3": "Book reviews and critiques",
+      "item4": "Other types of works"
+    },
+    "freeNote": "Publication in the journal is free of charge.",
+    "emailLabel": "Email for submissions"
+  },
+  "process": {
+    "title": "Publication Process",
+    "step1": "When a work is submitted to the journal, the Editorial Board receives it, checks it using plagiarism detection software, verifies compliance with submission requirements, and decides whether to send it for peer review or return it. If the Editorial Board determines that the work is plagiarized, violates copyright, or does not meet the submission requirements, it will be returned to the author.",
+    "step2": "If the work meets the requirements, the author's name, address, and other information are kept strictly confidential, and the work is sent to two reviewers specialized in the relevant field for evaluation. The reviewers provide recommendations on whether to publish, revise, or return the work.",
+    "step3": "Based on the review, the Editorial Board decides whether to publish or reject the work. If approved for publication, the Editorial Board member designated to manage the issue verifies that the reviewers' recommendations have been incorporated and that other requirements have been met, and grants publication approval.",
+    "step4": "The author is notified that the work will be published, and the work is made publicly available simultaneously in print and electronic form."
+  },
+  "openAccess": {
+    "title": "Open Access Journal",
+    "intro": "The Journal of Public Administration is a fully open-access academic journal. All works published in the journal are freely and permanently accessible upon official publication, without any fees, registration, or restrictions.",
+    "doajPrefix": "The journal follows the open-access definition adopted in the Directory of Open Access Journals (",
+    "doajSuffix": "). Users have the right to read, download, copy, distribute, print, search, link to full texts, register in databases for indexing, and use works published in this journal in any other lawful manner without financial, legal, or technical barriers.",
+    "copyrightPrefix": "Copyright is retained by the authors. Works are licensed under ",
+    "copyrightSuffix": " terms, allowing use, distribution, and republication in any form without restriction, with the obligation to properly cite the original work.",
+    "noEmbargo": "Published works are immediately accessible and reusable. There is no embargo period."
+  },
+  "ip": {
+    "title": "Copyright and Intellectual Property",
+    "paragraph1": "Intellectual property rights for works published in the journal remain with the authors. Authors confirm that their works do not infringe on third-party intellectual property rights, that sources are properly cited, and that no plagiarism has occurred. Authors are responsible for obtaining all necessary permissions for sources, tables, figures, graphs, and data used in their works. In case of intellectual property disputes, the author bears full responsibility.",
+    "paragraph2": "If intellectual property violations are detected (such as duplicate publication of previously published work or copyright infringement), the journal has the right to withdraw the article, invalidate it if already published, and inform the public."
+  }
+},
+
+"Contact": {
+  "title": "Contact Us",
+  "intro": "If you would like to get in touch with us, please contact us using the information below.",
+  "addressTitle": "Organization Address",
+  "email": "Email",
+  "phone": "Phone",
+  "addressLabel": "Address",
+  "address": "Ulaanbaatar, Khan-Uul District, 17th khoroo, Academy of Management, Building B, Rooms 201, 202"
+},
+
+"Editorial": {
+  "title": "Editorial Board",
+  "noData": "No information found."
+},
+
+"Archive": {
+  "pageTitle": "Journal Archive",
+  "breadcrumbHome": "Home",
+  "filterByYear": "Filter by year",
+  "yearLabel": "",
+  "allYears": "All years",
+  "issueLabel": "Issue",
+  "noIssuesYear": "Sorry, no issues found for this year.",
+  "viewAll": "View all issues",
+  "previous": "Previous",
+  "next": "Next",
+  "pageLabel": "Page",
+  "title": "Article Archive",
+  "readMore": "Read more",
+  "noArticles": "No articles available"
+},
+
+"IssueDetail": {
+  "notFound": "Issue not found.",
+  "breadcrumbHome": "Home",
+  "breadcrumbArchive": "Archive",
+  "yearLabel": "Year",
+  "issueLabel": "Issue",
+  "inThisIssue": "IN THIS ISSUE:",
+  "authorLabel": "Author",
+  "noAuthor": "No author",
+  "noLink": "Link not found",
+  "readMore": "Read more"
+},
+
+"ExpandableSummary": {
+  "summary": "Abstract",
+  "keywords": "Keywords"
+},
+
+"ArticleContent": {
+  "breadcrumbHome": "Home",
+  "breadcrumbArchive": "Archive",
+  "breadcrumbArticle": "Article",
+  "aboutAuthor": "About the Author",
+  "noAuthorInfo": "No author information.",
+  "doiLabel": "DOI",
+  "keywordsLabel": "Keywords",
+  "abstract": "Abstract",
+  "noSummary": "No abstract provided.",
+  "references": "References",
+  "published": "Published",
+  "howToCite": "How to Cite",
+  "articleNamePlaceholder": "Article Name",
+  "issue": "Issue",
+  "loading": "Loading...",
+  "license": "License",
+  "copyright": "Copyright",
+  "licenseText": {
+    "prefix": "This work is licensed under a",
+    "link": "Creative Commons Attribution 4.0 International License"
+  }
+},
+
+  
+  "Article": {
+    "download": "Download",
+    "viewPdf": "View PDF",
+    "summary": "Summary",
+    "year": "Year",
+    "back": "Back"
+  }
+}

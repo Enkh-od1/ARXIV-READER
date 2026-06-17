@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+// i18n.ts файлын зам
+const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
 
 const nextConfig: NextConfig = {
-  output: 'export',/* config options here */
+  // өөрийн бусад тохиргоонууд энд (image domains гэх мэт)
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

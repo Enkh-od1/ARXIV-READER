@@ -141,10 +141,11 @@ const getFullUrl = (url: string | undefined | null) => {
 // --- Функцуудыг export хийх ---
 
 // 1. Сэтгүүлийн мэдээлэл (About хуудсанд)
-export async function getJournalInfo() {
+export async function getJournalInfo(locale: string = 'mn') {
   try {
     // 1. 'partners' болон түүний доторх 'partnerLogo'-г гүн рүү нь populate хийнэ
-    const query = 'populate[partners][populate][partnerLogo]=*&populate[informationSections][populate][sectionLogo]=*';
+    const populate = 'populate[partners][populate][partnerLogo]=*&populate[informationSections][populate][sectionLogo]=*';
+    const query = `${populate}&locale=${locale}`;
     
     const res = await fetch(`${STRAPI_URL}/api/journal-infos?${query}`, { 
       cache: 'no-store' 
@@ -200,14 +201,14 @@ export async function getArticleById(id: string) {
 }
 
 // 4. Зөвлөлийн гишүүд
-export async function getEditorialMembers() {
+export async function getEditorialMembers(locale: string = 'mn') {
   try {
-    const res = await fetch(`${STRAPI_URL}/api/editorial-members?populate=*&sort=order:asc`, { 
+    const query = `populate=*&sort=order:asc&locale=${locale}`;
+    const res = await fetch(`${STRAPI_URL}/api/editorial-members?${query}`, { 
       cache: 'no-store' 
     });
     const json = await res.json();
     
-    // Энд (item: any) биш (item: StrapiResponseItem) гэж бичвэл Ln 57-ын алдаа арилна
     return json.data.map((item: StrapiResponseItem) => ({
       id: item.id,
       name: item.attributes?.name || '',
@@ -218,7 +219,7 @@ export async function getEditorialMembers() {
         ? `${STRAPI_URL}${item.attributes.photo.data.attributes.url}` 
         : null,
     }));
-  } catch (error) { // Ln 31, 40, 49, 66-ын алдааг засахын тулд error-оо ашиглана
+  } catch (error) {
     console.error("Editorial fetch error:", error);
     return [];
   }
@@ -232,7 +233,12 @@ export async function getEditorialMembers() {
 
 // src/lib/strapi.ts
 
-export async function getIssues(page: number = 1, pageSize: number = 20, year?: number) {
+export async function getIssues(
+  page: number = 1, 
+  pageSize: number = 20, 
+  year?: number,
+  locale: string = 'mn'
+) {
   try {
     // 1. URL-ийн параметрүүдийг бэлдэх
     const params = new URLSearchParams({
@@ -241,6 +247,7 @@ export async function getIssues(page: number = 1, pageSize: number = 20, year?: 
       'populate[Cover]': '*',
       'sort[0]': 'Year:desc',
       'sort[1]': 'Number:desc',
+      'locale': locale,
     });
 
     // 2. Хэрэв year (он) сонгогдсон бол Strapi шүүлтүүрийг нэмэх
@@ -258,16 +265,14 @@ export async function getIssues(page: number = 1, pageSize: number = 20, year?: 
 
     // 3. Өгөгдлийг хөрвүүлэх (Mapping)
     const issues = json.data.map((item: StrapiIssue) => {
-      // Strapi v4 болон v5-ийн ялгааг тооцоолж attributes-ийг авах
       const attr = item.attributes || item; 
 
       return {
         id: item.id,
         documentId: item.documentId || item.id?.toString(),
-        title: attr.Title || "Гарчиггүй",
+        title: attr.Title || (locale === 'en' ? 'Untitled' : 'Гарчиггүй'),
         year: Number(attr.Year || 0),
         number: attr.Number || "0",
-        // Зургийн URL-ийг бүтэн болгох
         coverUrl: getFullUrl(attr.Cover?.url || attr.Cover?.data?.attributes?.url),
       };
     });
@@ -291,13 +296,11 @@ export async function getIssues(page: number = 1, pageSize: number = 20, year?: 
 
 // getIssueById функц доторх fetch хаяг болон mapping хэсэг:
 
-export async function getIssueById(id: string) {
+export async function getIssueById(id: string, locale: string = 'mn') {
   try {
-    // 1. populate[niitleluud][populate]=* гэж бичсэнээр нийтлэл бүрийн PDF, Зураг зэргийг цуг авна
-    // Хүсэлтийн URL яг ийм байх ёстой
-const url = `${STRAPI_URL}/api/issues/${id}?populate[niitleluud][populate]=*&populate[Cover]=*`;
+    // populate болон locale-ийг хооронд нь нэгтгэх
+    const url = `${STRAPI_URL}/api/issues/${id}?populate[niitleluud][populate]=*&populate[Cover]=*&locale=${locale}`;
 
-    
     const res = await fetch(url, { cache: 'no-store' });
     
     if (!res.ok) {
@@ -310,35 +313,29 @@ const url = `${STRAPI_URL}/api/issues/${id}?populate[niitleluud][populate]=*&pop
 
     if (!data) return null;
 
-    // Strapi v4/v5 бүтцийн ялгааг арилгах
     const attr = data.attributes || data;
-
-    // Нийтлэлүүдийг авах (niitleluud талбараас)
     const rawArticles = attr.niitleluud?.data || attr.niitleluud || [];
 
     return {
       id: data.id,
       documentId: data.documentId || data.id.toString(),
-      title: attr.Title || attr.title || "Гарчиггүй",
+      title: attr.Title || attr.title || (locale === 'en' ? 'Untitled' : 'Гарчиггүй'),
       year: attr.Year || attr.year,
       number: attr.Number || attr.number,
       coverUrl: getFullUrl(attr.Cover?.url || attr.Cover?.data?.attributes?.url),
       
-      // Нийтлэлүүдийг mapping хийх хэсэг
       articles: Array.isArray(rawArticles) ? rawArticles.map((art: StrapiRawItem) => {
-          const a = (art.attributes || art) as StrapiAttributes;
+        const a = (art.attributes || art) as StrapiAttributes;
         return {
           id: art.id,
           documentId: art.documentId || art.id.toString(),
-          title: a.title || "Гарчиггүй",
-          authors: a.Authors || "Зохиогч байхгүй",
+          title: a.title || (locale === 'en' ? 'Untitled' : 'Гарчиггүй'),
+          authors: a.Authors || (locale === 'en' ? 'No author' : 'Зохиогч байхгүй'),
           summary: a.summary || "",
           key: a.key || "",
           views: a.views || 0,
           pageCount: a.pages || a.PageCount || "0",
-          // PDF файлыг media талбараас авах
           pdfUrl: getFullUrl(a.PDFUrl?.url || a.PDFUrl?.data?.attributes?.url)
-          
         };
       }) : []
     };
@@ -372,10 +369,10 @@ export async function updateArticleViews(documentId: string, currentViews: numbe
 
 
 // 5. Хамгийн сүүлийн дугаарыг (Issue) авах
-export async function getLatestIssue(): Promise<Issue | null> {
+export async function getLatestIssue(locale: string = 'mn'): Promise<Issue | null> {
   try {
     // Year болон Number-ээр нь эрэмбэлж, хамгийн эхний 1-ийг авна
-    const query = `populate[Cover]=*&sort[0]=Year:desc&sort[1]=Number:desc&pagination[limit]=1`;
+    const query = `populate[Cover]=*&sort[0]=Year:desc&sort[1]=Number:desc&pagination[limit]=1&locale=${locale}`;
     const res = await fetch(`${STRAPI_URL}/api/issues?${query}`, { 
       cache: 'no-store' 
     });
@@ -468,6 +465,13 @@ export async function getArticleByDocumentId(id: string) {
 
 // src/lib/strapi.ts
 
+// lib/strapi.ts дотор
+export async function getArticles(locale: string = 'mn') {
+  const res = await fetch(
+    `${process.env.STRAPI_URL}/api/articles?locale=${locale}&populate=*`
+  );
+  return res.json();
+}
 
 
 
